@@ -33,13 +33,13 @@ class ActivityCreateAction extends Action
             $activity = $comp->getModel();
         }
 
-        $activity->recurrence_interval = 0;
-        $activity->recurrence_dimension = [
-            'day' => 'День',
-            'week' => 'Неделя',
-            'month' => 'Месяц',
-            'year' => 'Месяц'
-        ];
+//        $activity->recurrence_interval = 0;
+//        $activity->recurrence_dimension = [
+//            'day' => 'День',
+//            'week' => 'Неделя',
+//            'month' => 'Месяц',
+//            'year' => 'Месяц'
+//        ];
         return $this->controller->render('create', ['activity' => $activity]);
     }
 }
