@@ -35,15 +35,13 @@ use dosamigos\datetimepicker\DateTimePicker;
                 'inline' => true,
             ]);?>
 
-
-        <?=$form->field($activity, 'date_end')->input('datetime');?>
             <?=$form->field($activity, 'description')->textarea(['class'=>'form-control', 'data-att'=>'value']);?>
             <?=$form->field($activity, 'email')->input('email');?>
             <?=$form->field($activity, 'description')->textarea(['class'=>'form-control', 'data-att'=>'value']);?>
             <?=$form->field($activity, 'is_blocked')->checkbox();?>
             <?=$form->field($activity, 'is_recurrence')->checkbox();?>
             <?=$form->field($activity, 'recurrence_interval')->input('datetime');?>
-            <?=$form->field($activity, 'recurrence_dimension[]')->dropDownList($activity->recurrence_dimension);?>
+            <?=$form->field($activity, 'recurrence_dimension')->dropDownList($activity->getRecurrenceDimension());?>
             <div class="form-group">
                 <button type="submit" class="btn btb-default">Создать</button>
             </div>
