@@ -34,12 +34,7 @@ class ActivityCreateAction extends Action
         }
 
         $activity->recurrence_interval = 0;
-        $activity->recurrence_dimension = [
-            'day' => 'День',
-            'week' => 'Неделя',
-            'month' => 'Месяц',
-            'year' => 'Месяц'
-        ];
+        $activity->recurrence_dimension = $activity->getRecurrenceDimension();
         return $this->controller->render('create', ['activity' => $activity]);
     }
 }

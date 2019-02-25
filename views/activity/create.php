@@ -25,25 +25,43 @@ use dosamigos\datetimepicker\DateTimePicker;
                 'size' => 'ms',
                 'template' => '{input}',
                 'pickButtonIcon' => 'glyphicon glyphicon-time',
-                'inline' => true,
+                'inline' => false,
+                'clientOptions' => [
+                    'autoclose' => true,
+                    'todayHighlight' => true,
+                    'weekStart' => 1
+                ],
+                // при изменении даты, дата окончания события = дата начала события + 1 час
+                'clientEvents' => [
+                    'changeDate' => 'function(e){
+                        if(e.target.id == "activity-date_start") {
+                            var date_start = $("#activity-date_start").datetimepicker("getDate");
+                            var date_end = date_start.setHours(date_start.getHours() + 1);
+                            $("#activity-date_end").datetimepicker("setDate", new Date(date_end));
+                        }
+                    }'
+                ]
+
             ]);?>
             <?= $form->field($activity, 'date_end')->widget(DateTimePicker::class, [
                 'language' => 'ru',
                 'size' => 'ms',
                 'template' => '{input}',
                 'pickButtonIcon' => 'glyphicon glyphicon-time',
-                'inline' => true,
+                'inline' => false,
+                'clientOptions' => [
+                    'autoclose' => true,
+                    'todayHighlight' => true,
+                    'weekStart' => 1
+                ],
             ]);?>
-
-
-        <?=$form->field($activity, 'date_end')->input('datetime');?>
             <?=$form->field($activity, 'description')->textarea(['class'=>'form-control', 'data-att'=>'value']);?>
             <?=$form->field($activity, 'email')->input('email');?>
             <?=$form->field($activity, 'description')->textarea(['class'=>'form-control', 'data-att'=>'value']);?>
             <?=$form->field($activity, 'is_blocked')->checkbox();?>
             <?=$form->field($activity, 'is_recurrence')->checkbox();?>
             <?=$form->field($activity, 'recurrence_interval')->input('datetime');?>
-            <?=$form->field($activity, 'recurrence_dimension[]')->dropDownList($activity->recurrence_dimension);?>
+            <?=$form->field($activity, 'recurrence_dimension')->dropDownList($activity->recurrence_dimension);?>
             <div class="form-group">
                 <button type="submit" class="btn btb-default">Создать</button>
             </div>

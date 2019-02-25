@@ -31,13 +31,13 @@ class Activity extends Model
     public function rules() {
         return [
             ['title', 'string', 'max' => 150, 'min' => 2],
-            [['title', 'date_start','email'], 'required'],
+            [['title', 'date_start','date_end', 'email'], 'required'],
             ['email', 'email'],
             ['date_start','datetime'],
             ['date_end','datetime'],
-            ['$is_blocked', 'boolean'],
-            ['$recurrence_interval', 'integer'],
-            ['$is_recurrence', 'boolean'],
+            ['is_blocked', 'boolean'],
+            ['recurrence_interval', 'integer'],
+            ['is_recurrence', 'boolean'],
 
         ];
     }
@@ -49,11 +49,23 @@ class Activity extends Model
             'description'=>'Описание',
             'is_blocked' => 'Блокирующее',
             'email' => 'Адрес электронной почты',
-            '$date_start' => 'Начало события',
-            '$date_end' => 'Конец события',
-            '$recurrence_interval' => 'Интервал',
-            '$recurrence_dimension' => 'Повторять через',
-            '$is_recurrence' => 'Повторяемое событие',
+            'date_start' => 'Начало события',
+            'date_end' => 'Конец события',
+            'recurrence_interval' => 'Интервал',
+            'recurrence_dimension' => 'Повторять через',
+            'is_recurrence' => 'Повторяемое событие',
+        ];
+    }
+
+    /**
+     * функция для получения типов возможных получающихся интервалов: day, week, month, year
+     */
+    function getRecurrenceDimension() {
+        return [
+            'day' => 'День',
+            'week' => 'Неделя',
+            'month' => 'Месяц',
+            'year' => 'Месяц'
         ];
     }
 }
