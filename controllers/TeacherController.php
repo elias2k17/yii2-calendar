@@ -21,7 +21,7 @@ class TeacherController extends Controller
     }
 
     public function actionNewStudent() {
-        $info='Вызов контроллеров с длинным именем';
+        $info='Вызов контроллеров с длинным именем (делаем через подставление дефисов)!';
         return $this->render('student', ['data' => $info]);
     }
 }

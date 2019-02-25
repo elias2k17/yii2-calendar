@@ -5,16 +5,26 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'yii2-calendar',
+    'language' => 'ru_RU',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\Module',
+        ],
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'AwQEByDqSCKHhL1lzAI7Wltt1l9eVPXb',
+        ],
+        'activity'=>[
+            'class' => \app\components\ActivityComponent::class,
+            'activity_class' => '\app\models\Activity',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -60,14 +70,14 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['*'],
+        'allowedIPs' => ['*'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['*'],
+        'allowedIPs' => ['*'],
     ];
 }
 
