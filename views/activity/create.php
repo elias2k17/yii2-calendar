@@ -17,7 +17,7 @@ use dosamigos\datetimepicker\DateTimePicker;
                 'action' => '',
                 'method' => 'POST',
                 'id' => 'activity',
-                'options' => ['enctype'=>'']
+                'options' => ['enctype'=>'multipart/form-data'],
         ]); ?>
             <?=$form->field($activity, 'title');?>
             <?= $form->field($activity, 'date_start')->widget(DateTimePicker::class, [
@@ -56,12 +56,12 @@ use dosamigos\datetimepicker\DateTimePicker;
                 ],
             ]);?>
             <?=$form->field($activity, 'description')->textarea(['class'=>'form-control', 'data-att'=>'value']);?>
-            <?=$form->field($activity, 'email')->input('email');?>
-            <?=$form->field($activity, 'description')->textarea(['class'=>'form-control', 'data-att'=>'value']);?>
+            <?=$form->field($activity, 'use_notification')->checkbox();?>
             <?=$form->field($activity, 'is_blocked')->checkbox();?>
             <?=$form->field($activity, 'is_recurrence')->checkbox();?>
-            <?=$form->field($activity, 'recurrence_interval')->input('datetime');?>
+            <?=$form->field($activity, 'recurrence_interval')->input('integer',['value' => 1]);?>
             <?=$form->field($activity, 'recurrence_dimension')->dropDownList($activity->recurrence_dimension);?>
+            <?=$form->field($activity, 'images[]')->fileInput(['multiple' => true]); ?>
             <div class="form-group">
                 <button type="submit" class="btn btb-default">Создать</button>
             </div>

@@ -27,14 +27,18 @@ class ActivityCreateAction extends Action
         ]);
 
         if(\Yii::$app->request->isPost){
+
             $activity = $comp->getModel(\Yii::$app->request->post());
-            $comp->createActivity($activity);
+            if($comp->createActivity($activity)){
+                return $this->controller->render('create-confirm', ['activity' => $activity]);
+            }
+
         } else {
             $activity = $comp->getModel();
+            $activity->recurrence_interval = 0;
+            $activity->recurrence_dimension = $activity->getRecurrenceDimension();
+            return $this->controller->render('create', ['activity' => $activity]);
         }
 
-        $activity->recurrence_interval = 0;
-        $activity->recurrence_dimension = $activity->getRecurrenceDimension();
-        return $this->controller->render('create', ['activity' => $activity]);
     }
 }

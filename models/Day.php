@@ -13,32 +13,34 @@ use yii\base\Model;
 
 /**
  * Class Day описывает атрибуты сущности "День"
- * Он может быть рабочим и выходным, может иметь привязанные события
+ * Он может быть рабочим и выходным
  * @package app\models
  */
 class Day extends Model
 {
-    public $is_holidays; //является ли выходным (праздничным) днем
-    public $is_weekend; // является субботой или воскресеньем
-
     /**
-     * возвращает массив с объектами  Activity
+     * @var bool
+     * является ли выходным (праздничным) днем
      */
-    public function getLinkedActivity() {
+    public $is_holidays;
+    /**
+     * @var bool
+     * является концом недели - субботой или воскресеньем
+     */
+    public $is_weekend;
 
+    public function rules(){
+        return [
+            ['is_holidays', 'boolean'],
+            ['is_weekend', 'boolean'],
+        ];
     }
 
-    /**
-     * удаляет связь с Событием
-     */
-    public function removeLinkWithActivity() {
-
-    }
-
-    /**
-     * добавляет связь с Событием
-     */
-    public function addLinkWithActivity() {
-
+    function attributeLabels()
+    {
+        return [
+            'is_holidays'=>'Праздничный (выходной) день',
+            'is_weekend' =>'Конец рабочей недели (СБ, ВС)',
+        ];
     }
 }
